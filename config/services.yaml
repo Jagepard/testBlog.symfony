@@ -20,5 +20,46 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
+    mm:
+        alias: App\Service\MessageGenerator
+
+    m234:
+        alias: App\Service\MessageGenerator234
+
+#    App\Service\MessageGenerator:
+#        arguments:
+#            $adminEmail: 'manager@example.com'
+
+    App\Interface\AsdInterface: '@mm'
+    App\Interface\AsdInterface $m234: '@m234'
+
+    App\Service\MessageGenerator234:
+        arguments:
+            $adminEmail: 'manager@example.com'
+
+    App\Service\MessageGenerator:
+        autowire: true
+        lazy: true
+        factory: [ !service { class: App\Factory\AsdFactory }, 'constructFoo' ]
+        arguments:
+            $adminEmail: 'manager@example.com'
+
+    App\EventListener\AsdListener:
+        tags:
+            - { name: asd.listener, event: asd }
+
+    App\EventSubscriber\AsdSubscriber:
+        tags:
+            - { name: asd.subscriber, event: afaf }
+
+    # this is the service's id
+    # mg:
+    #     class: App\Service\MessageGenerator
+    #     # you CAN still use autowiring: we just want to show what it looks like without
+    #     # autowire: false
+    #     # manually wire all arguments
+    #     arguments:
+    #         $adminEmail: 'manager@example.com'
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
