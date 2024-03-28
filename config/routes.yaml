@@ -3,3 +3,9 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+blog_controllers:
+    resource:
+        path: '@BlogBundle/src/Controller/'
+        namespace: Bundle\Blog\Controller
+    type: attribute
