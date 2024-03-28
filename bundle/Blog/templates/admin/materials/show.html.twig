@@ -1,0 +1,50 @@
+{% extends '../../../../../templates/base.html.twig' %}
+
+{% block title %}Materials{% endblock %}
+
+{% block body %}
+    <h1>Materials</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ material.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ material.title }}</td>
+            </tr>
+            <tr>
+                <th>Slug</th>
+                <td>{{ material.slug }}</td>
+            </tr>
+            <tr>
+                <th>Text</th>
+                <td>{{ material.text }}</td>
+            </tr>
+            <tr>
+                <th>Image</th>
+                <td>{{ material.image }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ material.status }}</td>
+            </tr>
+            <tr>
+                <th>Created_at</th>
+                <td>{{ material.createdAt ? material.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Updated_at</th>
+                <td>{{ material.updatedAt ? material.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_materials_index') }}">back to list</a>
+
+    <a href="{{ path('app_admin_materials_edit', {'id': material.id}) }}">edit</a>
+
+    {{ include('admin/materials/_delete_form.html.twig') }}
+{% endblock %}

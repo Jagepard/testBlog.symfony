@@ -20,6 +20,13 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
+    Bundle\Blog\: # change this to your new namespace
+        resource: '../bundle/Blog/src'
+        exclude:
+            - '../bundle/Blog/src/DependencyInjection/'
+            - '../bundle/Blog/src/Entity/'
+            - '../bundle/Blog/src/Kernel.php'
+
     mm:
         alias: App\Service\MessageGenerator
 
