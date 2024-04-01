@@ -15,6 +15,8 @@ return [
     Symfony\Bundle\MakerBundle\MakerBundle::class => ['dev' => true],
     Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['dev' => true, 'test' => true],
     Knp\Bundle\PaginatorBundle\KnpPaginatorBundle::class => ['all' => true],
+    Bundle\Database\DatabaseBundle::class => ['all' => true],
     Bundle\Blog\BlogBundle::class => ['all' => true],
     Bundle\Admin\AdminBundle::class => ['all' => true],
+    Bundle\Auth\AuthBundle::class => ['all' => true],
 ];

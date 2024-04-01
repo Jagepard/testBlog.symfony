@@ -1,10 +1,10 @@
 <?php
 
-namespace Bundle\Blog\Entity;
+namespace App\Entity;
 
+use App\Repository\MaterialsRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Bundle\Blog\Repository\MaterialsRepository;
 
 #[ORM\Entity(repositoryClass: MaterialsRepository::class)]
 class Materials

@@ -9,3 +9,9 @@ admin_controllers:
         path: '@AdminBundle/src/Controller/'
         namespace: Bundle\Admin\Controller
     type: attribute
+
+auth_controllers:
+    resource:
+        path: '@AuthBundle/src/Controller/'
+        namespace: Bundle\Auth\Controller
+    type: attribute
