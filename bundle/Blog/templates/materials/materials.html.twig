@@ -1,0 +1,29 @@
+{% extends '@Blog/layout.html.twig' %}
+
+{% block title %}Hello MaterialsController!{% endblock %}
+
+{% block content %}
+<br>
+
+<div class="row row-cols-1 row-cols-md-3 g-4" data-masonry='{"percentPosition": true }'>
+
+{% for material in materials %}
+    <div class="col">
+        <div class="card">
+            <a href="{{ url('blog.materials') }}material/{{ material.id }}_{{ material.slug }}">
+                {% if material.image is not empty %}
+                    <img src="{{ url('blog.materials') }}images/{{ material.image }}" class="card-img-top" alt="{{ material.title }}">
+                {% endif %}
+            </a>
+            <div class="card-body">
+                <h5 class="card-title"><a class="link-secondary link-underline link-underline-opacity-0" href="{{ url('blog.materials') }}material/{{ material.id }}_{{ material.slug }}">{{ material.title }}</a></h5>
+                <!-- <p class="card-text"><?= htmlspecialchars_decode($material['text'])?></p> -->
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+</div>
+    <br>
+    {{ knp_pagination_render(materials) }}
+{% endblock %}

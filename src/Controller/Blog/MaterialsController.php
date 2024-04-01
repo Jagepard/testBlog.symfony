@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class MaterialsController extends AbstractController
 {
-    #[Route('/', name: 'app_blog_materials', methods: ['GET'])]
+    #[Route('/MaterialsController', name: 'app_blog_materials', methods: ['GET'])]
     public function index(): Response
     {
         return $this->render('blog/materials/index.html.twig', [
