@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class IndexController extends AbstractController
 {
-    #[Route('/blog', name: 'blog.index', methods: ['GET'])]
+    #[Route('/', name: 'blog.index', methods: ['GET'])]
     public function index(MaterialsRepository $materialsRepository): Response
     {
         dump($materialsRepository->findAll());
