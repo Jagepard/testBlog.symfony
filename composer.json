@@ -57,8 +57,10 @@
     "autoload": {
         "psr-4": {
             "Bundle\\": "bundle/",
+            "Bundle\\Database\\": "bundle/Database/src",
             "Bundle\\Admin\\": "bundle/Admin/src",
-            "Bundle\\Blog\\": "bundle/Blog/src"
+            "Bundle\\Blog\\": "bundle/Blog/src",
+            "Bundle\\Auth\\": "bundle/Auth/src"
         }
     },
     "autoload-dev": {

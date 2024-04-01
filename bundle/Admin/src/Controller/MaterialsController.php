@@ -1,6 +1,6 @@
 <?php
 
-namespace Bundle\Blog\Controller;
+namespace Bundle\Admin\Controller;
 
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class MaterialsController extends AbstractController
 {
-    #[Route('/', name: 'blog.materials', methods: ['GET'])]
+    #[Route('/admin', name: 'admin.materials', methods: ['GET'])]
     public function index(MaterialsRepository $materialsRepository, PaginatorInterface $paginator, Request $request): Response
     {
         $pagination = $paginator->paginate(
@@ -20,6 +20,6 @@ class MaterialsController extends AbstractController
             2 /*limit per page*/
         );
 
-        return $this->render('@Blog/materials/materials.html.twig', ['materials' => $pagination]);
+        return $this->render('@Admin/materials/materials.html.twig', ['materials' => $pagination]);
     }
 }
