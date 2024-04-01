@@ -27,6 +27,14 @@ services:
             - '../bundle/Blog/src/Entity/'
             - '../bundle/Blog/src/Kernel.php'
 
+    Bundle\Admin\: # change this to your new namespace
+        resource: '../bundle/Admin/src'
+        exclude:
+            - '../bundle/Admin/src/DependencyInjection/'
+            - '../bundle/Admin/src/Entity/'
+            - '../bundle/Admin/src/Kernel.php'
+
+
     mm:
         alias: App\Service\MessageGenerator
 

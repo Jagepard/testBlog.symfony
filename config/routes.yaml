@@ -9,3 +9,9 @@ blog_controllers:
         path: '@BlogBundle/src/Controller/'
         namespace: Bundle\Blog\Controller
     type: attribute
+
+admin_controllers:
+    resource:
+        path: '@AdminBundle/src/Controller/'
+        namespace: Bundle\Admin\Controller
+    type: attribute

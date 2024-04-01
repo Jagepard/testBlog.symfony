@@ -1,4 +1,5 @@
-
+/templates/
+/src/
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
