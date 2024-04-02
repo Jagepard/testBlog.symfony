@@ -17,7 +17,7 @@ class MaterialsController extends AbstractController
         $pagination = $paginator->paginate(
             $materialsRepository->findAll(), /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/
-            2 /*limit per page*/
+            20 /*limit per page*/
         );
 
         return $this->render('@Blog/materials/materials.html.twig', ['materials' => $pagination]);
