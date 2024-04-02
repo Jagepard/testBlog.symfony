@@ -1,5 +1,6 @@
 /templates/
 /src/
+/srcsrc/
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
