@@ -4,8 +4,8 @@
 
 {% block content %}
 <br>
-<form action="{{ url('blog.materials') }}admin/material/add" method="post" enctype="multipart/form-data">
-<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+<form action="{{ url('blog.materials') }}admin/material/create" method="post" enctype="multipart/form-data">
+<input type="hidden" name="token" value="{{ csrf_token('add') }}">
 <div class="mb-3">
     <label for="file" class="form-label">Фото</label>
     <input type="file" name="file" id="file">
