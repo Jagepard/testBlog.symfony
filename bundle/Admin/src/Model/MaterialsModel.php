@@ -11,13 +11,12 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class MaterialsModel
 {
-    public function __construct(EntityManagerInterface $em, ValidatorInterface $validator, MaterialsRepository $repository, SlugService $slug)
-    {
-        $this->em         = $em;
-        $this->slug       = $slug;
-        $this->validator  = $validator;
-        $this->repository = $repository;
-    }
+    public function __construct(
+        private EntityManagerInterface $em, 
+        private ValidatorInterface $validator, 
+        private MaterialsRepository $repository, 
+        private SlugService $slug
+    ){}
 
     public function create(InputBag $post): void
     {
