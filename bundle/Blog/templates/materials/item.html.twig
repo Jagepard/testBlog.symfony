@@ -1,0 +1,12 @@
+{% extends '@Blog/layout.html.twig' %}
+
+{% block title %}Hello MaterialsController!{% endblock %}
+
+{% block content %}
+<br>
+{% if material.image is not empty %}
+    <img src="{{ url('blog.materials') }}img/{{ material.image }}" class="card-img-top" alt="{{ material.title }}">
+{% endif %}
+<h2>{{ material.title }}</h2>
+<p>{{ material.text|raw }}</p>
+{% endblock %}
