@@ -21,6 +21,11 @@ class MaterialsRepository extends ServiceEntityRepository
         parent::__construct($registry, Materials::class);
     }
 
+    public function findAll(): array
+    {
+        return $this->findBy([], ['id' => 'DESC']);
+    }
+
     //    /**
     //     * @return Materials[] Returns an array of Materials objects
     //     */

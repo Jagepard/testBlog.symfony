@@ -9,6 +9,7 @@ framework:
     #esi: true
     #fragments: true
     translator: { fallbacks: ['ru'] }
+    # csrf_protection: ~
 
 when@test:
     framework:

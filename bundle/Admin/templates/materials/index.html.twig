@@ -14,7 +14,6 @@
 </tr>
 
 {% for material in materials %}
-
     <tr>
     <td><p>{{ material.id }}</p></td>
     <td>
@@ -26,12 +25,13 @@
 
     <td>
     <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-        <a href="{{ url('blog.materials') }}admin/material/edit/{{ material.id }}_{{ material.slug }}"><button type="button" class="btn btn-success">edit</button></a>
-        <a href="{{ url('blog.materials') }}admin/material/delete?id={{ material.id }}"><button type="button" class="btn btn-danger">delete</button></a>
+        <a href="{{ url('blog.materials') }}admin/material/edit/{{ material.id }}"><button type="button" class="btn btn-success">edit</button></a>
+        <a href="{{ url('blog.materials') }}admin/material/delete/{{ material.id }}"><button type="button" class="btn btn-danger">delete</button></a>
     </div>
     </td>
     </tr>
 {% endfor %}
+
 </table>
 
     <br>
