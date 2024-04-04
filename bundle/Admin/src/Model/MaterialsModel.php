@@ -2,12 +2,14 @@
 
 namespace Bundle\Admin\Model;
 
+use Bundle\Admin\Service\ImageService;
 use Bundle\Admin\Service\SlugService;
 use Bundle\Database\Entity\Materials;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\InputBag;
 use Bundle\Database\Repository\MaterialsRepository;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 class MaterialsModel
 {
@@ -15,12 +17,24 @@ class MaterialsModel
         private EntityManagerInterface $em, 
         private ValidatorInterface $validator, 
         private MaterialsRepository $repository, 
-        private SlugService $slug
+        private SlugService $slug,
+        private ImageService $imageService
+
     ){}
 
-    public function create(InputBag $post): void
+    public function create(Request $request): void
     {
-        $this->write(new Materials(), $post);
+        if ($request->files->has('file')) {
+
+            $img     = $request->files->get('file');
+            $imgName = $img->getClientOriginalName();
+            $imgName = time() . '_' . $imgName;
+
+            $request->request->set('image', $imgName);
+            $this->imageService->create($img, $imgName);
+        }
+
+        $this->write(new Materials(), $request->request);
     }
 
     public function read(string $id): Materials
