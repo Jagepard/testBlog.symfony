@@ -14,24 +14,25 @@ use Symfony\Component\HttpFoundation\Request;
 class MaterialsModel
 {
     public function __construct(
+        private SlugService $slug,
+        private ImageService $imageService,
         private EntityManagerInterface $em, 
         private ValidatorInterface $validator, 
-        private MaterialsRepository $repository, 
-        private SlugService $slug,
-        private ImageService $imageService
-
+        private MaterialsRepository $repository,
     ){}
 
     public function create(Request $request): void
     {
         if ($request->files->has('file')) {
+            $img = $request->files->get('file');
 
-            $img     = $request->files->get('file');
-            $imgName = $img->getClientOriginalName();
-            $imgName = time() . '_' . $imgName;
-
-            $request->request->set('image', $imgName);
-            $this->imageService->create($img, $imgName);
+            if (!empty($img)) {
+                $imgName = $img->getClientOriginalName();
+                $imgName = time() . '_' . $imgName;
+    
+                $request->request->set('image', $imgName);
+                $this->imageService->create($img, $imgName);
+            }
         }
 
         $this->write(new Materials(), $request->request);

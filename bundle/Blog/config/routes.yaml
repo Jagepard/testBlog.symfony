@@ -1,5 +1,0 @@
-controllers:
-    resource:
-        path: ../src/Controller/
-        namespace: Bundle\Blog\Controller
-    type: attribute
