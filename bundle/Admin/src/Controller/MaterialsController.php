@@ -35,7 +35,7 @@ class MaterialsController extends AbstractController
     public function create(Request $request, MaterialsModel $model): Response
     {
         if ($this->isCsrfTokenValid('add', $request->getPayload()->get('token'))) {
-            $model->create($request->request);
+            $model->create($request);
         }
 
         return $this->redirectToRoute('admin.index');

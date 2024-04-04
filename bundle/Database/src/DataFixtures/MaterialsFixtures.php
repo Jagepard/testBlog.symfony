@@ -13,7 +13,7 @@ class MaterialsFixtures extends Fixture
     {
         $faker = Factory::create();
 
-        for ($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $material = new Materials();
             $material->setTitle($faker->name());
             $material->setSlug($faker->name());
