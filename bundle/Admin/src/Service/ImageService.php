@@ -4,21 +4,18 @@ namespace Bundle\Admin\Service;
 
 class ImageService
 {
-    // private array $setting;
-
-    // public function __construct(array $setting)
-    // {
-    //     $this->setting = $setting;
-    // }
+    public function __construct(
+        private string $uploadDir,
+    ) {}
 
     public function create($image, string $imgName)
     {
         $mimeType = $image->getMimeType();
-        $image->move('/home/d/Public/TestBlog/symfony/public/images', $imgName);
+        $image->move($this->uploadDir, $imgName);
 
-        $GDimage    = $this->GDimageCreate($mimeType, '/home/d/Public/TestBlog/symfony/public/images/' . $imgName);
+        $GDimage    = $this->GDimageCreate($mimeType, "{$this->uploadDir}/" . $imgName);
         $imgResized = imagescale($GDimage, 50);
-        $thumbDir   = '/home/d/Public/TestBlog/symfony/public/images/' . 'thumb/';
+        $thumbDir   = "{$this->uploadDir}/" . 'thumb/';
 
         if (!is_dir($thumbDir)) {
             mkdir($thumbDir, 0755, true);
@@ -29,8 +26,8 @@ class ImageService
 
     public function delete(string $imgName)
     {
-        $this->removeImg($this->setting['upload_dir'] . $imgName);
-        $this->removeImg($this->setting['upload_dir'] . 'thumb/' . $imgName);
+        $this->removeImg("{$this->uploadDir}/". $imgName);
+        $this->removeImg("{$this->uploadDir}/" . 'thumb/' . $imgName);
     }
 
     private function GDimageCreate($type, $file)
