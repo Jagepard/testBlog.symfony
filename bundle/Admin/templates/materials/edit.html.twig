@@ -6,7 +6,7 @@
 <br>
 {% if material.image is not empty %}
   <img src="{{ url('blog.materials') }}images/{{ material.image }}" height="250">
-  <a href="{{ url('blog.materials') }}admin/material/delimg/<?= $material->getId(); ?>?page=<?= $page; ?>"><button type="button" class="btn btn-danger">delete</button></a>
+  <a href="{{ url('blog.materials') }}admin/material/delimg/{{ material.id }}"><button type="button" class="btn btn-danger">delete</button></a>
 {% endif %}
 <form action="{{ url('blog.materials') }}admin/material/update/{{ material.id }}" method="post" enctype="multipart/form-data">
 <input type="hidden" name="token" value="{{ csrf_token('update') }}">
