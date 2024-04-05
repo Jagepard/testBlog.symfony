@@ -11,30 +11,19 @@ use Bundle\Database\Repository\MaterialsRepository;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-class MaterialsModel
+readonly class MaterialsModel
 {
     public function __construct(
-        private SlugService $slug,
-        private ImageService $imageService,
-        private EntityManagerInterface $em, 
-        private ValidatorInterface $validator, 
-        private MaterialsRepository $repository,
+        private SlugService            $slug,
+        private ImageService           $imageService,
+        private EntityManagerInterface $em,
+        private ValidatorInterface     $validator,
+        private MaterialsRepository    $repository,
     ){}
 
     public function create(Request $request): void
     {
-        if ($request->files->has('file')) {
-            $img = $request->files->get('file');
-
-            if (!empty($img)) {
-                $imgName = $img->getClientOriginalName();
-                $imgName = time() . '_' . $imgName;
-    
-                $request->request->set('image', $imgName);
-                $this->imageService->create($img, $imgName);
-            }
-        }
-
+        $this->imageUpload($request);
         $this->write(new Materials(), $request->request);
     }
 
@@ -43,14 +32,27 @@ class MaterialsModel
         return $this->repository->find($id);
     }
 
-    public function update(InputBag $post, $id): void
+    public function update(Request $request, $id): void
     {
-        $this->write($this->read($id), $post);
+        $material = $this->read($id);
+
+        if (!empty($material->getImage() && $request->files->get('file'))) {
+            $this->imageService->delete($material->getImage());
+        }
+
+        $this->imageUpload($request);
+        $this->write($material, $request->request);
     }
 
     public function delete(string $id): void
     {
-        $this->em->remove($this->read($id));
+        $material = $this->read($id);
+
+        if (!empty($material->getImage())) {
+            $this->imageService->delete($material->getImage());
+        }
+
+        $this->em->remove($material);
         $this->em->flush();
     }
 
@@ -70,6 +72,34 @@ class MaterialsModel
         if ($this->validator->validate($entity)) {
             $this->em->persist($entity);
             $this->em->flush();
+        }
+    }
+
+    public function delimg(Request $request, $id): void
+    {
+        $material = $this->read($id);
+
+        $this->imageService->delete($material->getImage());
+        $request->request->set('image', '');
+        $this->update($request, $id);
+    }
+
+    /**
+     * @param Request $request
+     * @return void
+     */
+    protected function imageUpload(Request $request): void
+    {
+        if ($request->files->has('file')) {
+            $img = $request->files->get('file');
+
+            if (!empty($img)) {
+                $imgName = $img->getClientOriginalName();
+                $imgName = time() . '_' . $imgName;
+
+                $request->request->set('image', $imgName);
+                $this->imageService->create($img, $imgName);
+            }
         }
     }
 }

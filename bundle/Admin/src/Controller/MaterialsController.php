@@ -55,7 +55,7 @@ class MaterialsController extends AbstractController
     public function update(Request $request, MaterialsModel $model, $id): Response
     {
         if ($this->isCsrfTokenValid('update', $request->getPayload()->get('token'))) {
-            $model->update($request->request, $id);
+            $model->update($request, $id);
         }
 
         return $this->redirectToRoute('admin.index');
@@ -65,6 +65,13 @@ class MaterialsController extends AbstractController
     public function delete(MaterialsModel $model, $id): Response
     {
         $model->delete($id);
+        return $this->redirectToRoute('admin.index');
+    }
+
+    #[Route('/material/delimg/{id}', name: 'delimg', methods: ['GET'])]
+    public function delimg(Request $request, MaterialsModel $model, $id)
+    {
+        $model->delimg($request, $id);
         return $this->redirectToRoute('admin.index');
     }
 }
